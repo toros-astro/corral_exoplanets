@@ -88,3 +88,7 @@ ENV/
 # Rope project settings
 .ropeproject
 exo/*.db
+exo/*.swp
+exo/*.swo
+exo/exo/*.swp
+exo/exo/*.swo
