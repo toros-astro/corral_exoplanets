@@ -60,7 +60,7 @@ STEPS = [
 
 
 # The alerts
-ALERTS = ["exo.alerts.PlotAlert"]
+ALERTS = ["exo.alerts.InHabitableZoneAlert"]
 
 # This values are autoimported when you open the shell
 SHELL_LOCALS = {}

@@ -33,7 +33,7 @@ class Planet(db.Model):
     - `mass`: Planet mass [solar masses]
     - `sep`: Star-planet Separation [AU]
     - `dist`: Distance to the star [pc]
-    - `mstar`: Stellar mass [solar masses] 
+    - `mstar`: Stellar mass [solar masses]
     - `rstar`: Stellar radius [solar radii]
     - `teff`: Effective temperature [K]
     - `fe`: Metallicity
@@ -75,7 +75,7 @@ class HabitableZoneStats(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     planet_id = db.Column(
-        db.Integer, db.ForeignKey('Planet.id'), nullable=False)
+        db.Integer, db.ForeignKey('Planet.id'), unique=True, nullable=False)
     planet = db.relationship("Planet", backref=db.backref("hzones"))
 
     luminosity = db.Column(db.Float)

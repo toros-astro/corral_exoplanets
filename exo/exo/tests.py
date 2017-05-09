@@ -19,19 +19,53 @@
 
 from corral import qa
 
-# from . import models
+from . import models, steps, load, alerts
 
 
 # =============================================================================
 # LOADER
 # =============================================================================
 
-class MyTestCase(qa.TestCase):
+class HabitableZoneTest(qa.TestCase):
 
-    # subject = Model
+    subject = steps.HabitableZone
 
     def setup(self):
-        pass
+        planet = models.Planet(name="foo", rstar=1, teff=1)
+        self.save(planet)
+
+    def validate(self):
+        planet = self.session.query(models.Planet).first()
+        hzone = planet.hzones[0]
+        self.assertAlmostEquals(hzone.luminosity, 8.962237975715271e-10)
+        self.assertLess(hzone.radio_inner, hzone.radio_outer)
+        self.assertFalse(hzone.in_habitable_zone)
+        self.assertStreamCount(1, models.HabitableZoneStats)
+
+
+class HabitableZoneNoRstarNoTeffTest(qa.TestCase):
+
+    subject = steps.HabitableZone
+
+    def setup(self):
+        planet = models.Planet(name="foo")
+        self.save(planet)
+
+    def validate(self):
+        self.assertStreamCount(0, models.HabitableZoneStats)
+
+
+
+class AlertTest(qa.TestCase):
+
+    subject = alerts.InHabitableZoneAlert
+
+    def setup(self):
+        planet = models.Planet(name="foo", mass=1, per=1)
+        self.save(planet)
+        hzone = models.HabitableZoneStats(
+            planet=planet, in_habitable_zone=True)
+        self.save(hzone)
 
     def validate(self):
         pass
