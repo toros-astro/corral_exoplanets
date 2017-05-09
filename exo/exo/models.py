@@ -29,13 +29,14 @@ class Planet(db.Model):
     **Fields**
 
     - `name`: Name.
-    - `mass`:
-    - `sep`:
-    - `dist`:
-    - `mstar`:
-    - `rstar`:
-    - `teff`:
-    - `fe`:
+    - `per` : Period [days]
+    - `mass`: Planet mass [solar masses]
+    - `sep`: Star-planet Separation [AU]
+    - `dist`: Distance to the star [pc]
+    - `mstar`: Stellar mass [solar masses] 
+    - `rstar`: Stellar radius [solar radii]
+    - `teff`: Effective temperature [K]
+    - `fe`: Metallicity
 
     """
 
@@ -62,10 +63,10 @@ class HabitableZoneStats(db.Model):
     **Fields**
 
     - `planet`: Planet of the statistics
-    - `luminosity`:
-    - `radio_inner`:
-    - `radio_outer`:
-    - `in_habitable_zone`:
+    - `luminosity`: Stellar luminosity [solar luminosity]
+    - `radio_inner`: Inner boundary of habitable zone [AU]
+    - `radio_outer`: Outer boundary of habitable zone [AU]
+    - `in_habitable_zone`: [boolean]
 
     """
 

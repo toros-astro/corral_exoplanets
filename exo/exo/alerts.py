@@ -54,8 +54,6 @@ class LogScatter(ep.EndPoint):
         plt.legend(loc="best")
         plt.savefig(self.path)
         super(LogScatter, self).teardown(*args)
-        raise ""
-
 
 class PlotAlert(run.Alert):
     """Store a list of planets in habitable zone in a log file

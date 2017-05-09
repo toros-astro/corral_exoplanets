@@ -23,16 +23,20 @@ from corral import run
 
 import numpy as np
 
+from astropy import units as u, constants as c
+
 from . import models
+
+
 
 
 # =============================================================================
 # CONSTANTS
 # =============================================================================
 
-STEFAN_BOLTZMANN = 5.670367e-8
+STEFAN_BOLTZMANN = c.sigma_sb
 
-SUN_LUMINOSITY = 3.828e26
+SUN_LUMINOSITY = c.L_sun
 
 
 # =============================================================================
@@ -50,16 +54,18 @@ class HabitableZone(run.Step):
 
     def process(self, planet):
         # calculate the habitable zone of the host star
+        Rstar  = (planet.rstar * u.solRad).to('m')
+        Teff = planet.teff * u.K
         luminosity = (
             STEFAN_BOLTZMANN * 4 * np.pi *
-            (planet.rstar ** 2) * (planet.teff ** 4))
+            (Rstar ** 2) * (Teff ** 4))
         lratio = luminosity / SUN_LUMINOSITY
         rin = np.sqrt(lratio / 1.1)
         rout = np.sqrt(lratio / 0.53)
 
         # verifiying if the planet is in habitable zone
         in_hz = planet.sep >= rin and planet.sep <= rout
-        in_hz = random.choice((True, False))
         return models.HabitableZoneStats(
             planet=planet, in_habitable_zone=in_hz,
-            luminosity=lratio, radio_inner=rin, radio_outer=rout)
+            luminosity=lratio.value, radio_inner=rin.value,
+            radio_outer=rout.value)
