@@ -40,25 +40,24 @@ class Loader(run.Loader):
         self.fp = open(settings.EXO_PATH)
 
     def float_or_none(self, value):
-       try:
-           return float(value)
-       except (TypeError, ValueError):
-           return None
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
 
     def generate(self):
         # now we make use of "self.fp" for the reader
         for row in csv.DictReader(self.fp):
             di = {
-                'name' : row['NAME'],
-                'per'  : self.float_or_none(row['PER']),
-                'mass' : self.float_or_none(row['MASS']),
-                'sep'  : self.float_or_none(row['SEP']),
-                'dist' : self.float_or_none(row['DIST']),
+                'name': row['NAME'],
+                'per': self.float_or_none(row['PER']),
+                'mass': self.float_or_none(row['MASS']),
+                'sep': self.float_or_none(row['SEP']),
+                'dist': self.float_or_none(row['DIST']),
                 'mstar': self.float_or_none(row['MSTAR']),
                 'rstar': self.float_or_none(row['RSTAR']),
-                'teff' : self.float_or_none(row['TEFF']),
-                'fe'   : self.float_or_none(row['FE'])}
-            print di
+                'teff': self.float_or_none(row['TEFF']),
+                'fe': self.float_or_none(row['FE'])}
             yield models.Planet(**di)
 
     def teardown(self, *args):

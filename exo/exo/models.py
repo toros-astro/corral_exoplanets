@@ -55,7 +55,6 @@ class Planet(db.Model):
     fe = db.Column(db.Float, nullable=True)
 
 
-
 class HabitableZoneStats(db.Model):
     """Resume of data about the capability of the planet
     to have life

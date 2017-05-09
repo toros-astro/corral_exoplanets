@@ -19,7 +19,7 @@
 
 from corral import qa
 
-from . import models, steps, load, alerts
+from . import models, steps
 
 
 # =============================================================================

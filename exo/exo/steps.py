@@ -12,12 +12,9 @@
 
 """
 
-
 # =============================================================================
 # IMPORTS
 # =============================================================================
-
-import random
 
 from corral import run
 
@@ -48,11 +45,11 @@ class HabitableZone(run.Step):
     """
 
     model = models.Planet
-    conditions = [model.rstar != None, model.teff != None]
+    conditions = [model.rstar != None, model.teff != None]  # noqa
 
     def process(self, planet):
         # calculate the habitable zone of the host star
-        Rstar  = (planet.rstar * u.solRad).to('m')
+        Rstar = (planet.rstar * u.solRad).to('m')
         Teff = planet.teff * u.K
         luminosity = (
             STEFAN_BOLTZMANN * 4 * np.pi *

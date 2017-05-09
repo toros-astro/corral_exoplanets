@@ -37,8 +37,7 @@ LOG_LEVEL = logging.DEBUG
 
 #: Template of string representation of every log of exo format
 #: see: https://docs.python.org/2/library/logging.html#logrecord-attributes
-LOG_FORMAT = (
-        "[exo-%(name)s-%(levelname)s@%(asctime)-15s] %(message)s")
+LOG_FORMAT = "[exo-%(name)s-%(levelname)s@%(asctime)-15s] %(message)s"
 
 
 PIPELINE_SETUP = "exo.pipeline.Pipeline"

@@ -63,8 +63,7 @@ class InHabitableZoneAlert(run.Alert):
     """
 
     model = models.HabitableZoneStats
-    conditions = [
-        model.in_habitable_zone == True]
+    conditions = [model.in_habitable_zone == True]  # noqa
     alert_to = [
         ep.File("in_habzone.log"),
         LogScatter("in_habzone.png", xfield="per", yfield="mass",
