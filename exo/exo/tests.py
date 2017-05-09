@@ -53,19 +53,3 @@ class HabitableZoneNoRstarNoTeffTest(qa.TestCase):
 
     def validate(self):
         self.assertStreamCount(0, models.HabitableZoneStats)
-
-
-
-class AlertTest(qa.TestCase):
-
-    subject = alerts.InHabitableZoneAlert
-
-    def setup(self):
-        planet = models.Planet(name="foo", mass=1, per=1)
-        self.save(planet)
-        hzone = models.HabitableZoneStats(
-            planet=planet, in_habitable_zone=True)
-        self.save(hzone)
-
-    def validate(self):
-        pass
