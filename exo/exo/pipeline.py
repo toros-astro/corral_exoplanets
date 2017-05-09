@@ -24,5 +24,9 @@ from corral.setup import PipelineSetup
 # =============================================================================
 
 class Pipeline(PipelineSetup):
+    """This is an example pipeline using a custom version of the Exoplanets
+    dataset (http://exoplanets.org/).
+
+    """
 
     name = "Habitable Exo-Planets"
