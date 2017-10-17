@@ -17,14 +17,36 @@
 # IMPORTS
 # =============================================================================
 
-from corral import qa
+import csv
+import tempfile
+import os
+import shutil
 
-from . import models, steps
+import mock
+
+from corral import qa
+from corral.conf import settings
+
+from . import models, steps, load, alerts
+
 
 
 # =============================================================================
 # LOADER
 # =============================================================================
+
+class LoadTest(qa.TestCase):
+
+    subject = load.Loader
+
+    def setup(self):
+        with open(settings.EXO_PATH) as fp:
+            reader = csv.DictReader(fp)
+            self.total = len(list(reader))
+
+    def validate(self):
+        self.assertStreamCount(self.total, models.Planet)
+
 
 class HabitableZoneTest(qa.TestCase):
 
@@ -53,3 +75,28 @@ class HabitableZoneNoRstarNoTeffTest(qa.TestCase):
 
     def validate(self):
         self.assertStreamCount(0, models.HabitableZoneStats)
+
+
+class InHabitableZoneAlertTest(qa.TestCase):
+
+    subject = alerts.InHabitableZoneAlert
+
+    def setup(self):
+        self.data_path = tempfile.mkdtemp()
+        self.log_path = os.path.join(self.data_path, "in_habzone.log")
+        self.plot_path = os.path.join(self.data_path, "in_habzone.png")
+        self.alert_to = [
+            alerts.ep.File(self.log_path),
+            alerts.LogScatter(self.plot_path, xfield="per", yfield="mass",
+                              title="Period Vs Mass - Habitable Zone",
+                              marker="*")]
+        self.patch("exo.alerts.InHabitableZoneAlert.alert_to", self.alert_to)
+
+
+    def validate(self):
+        self.assertTrue(os.path.exists(self.log_path))
+        self.assertTrue(os.path.exists(self.plot_path))
+
+    def teardown(self):
+        # clean the temporary file so we do not leave trash behind us
+        shutil.rmtree(self.data_path)

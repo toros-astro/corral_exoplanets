@@ -1,21 +1,21 @@
 # Habitable Exo-Planets Quality Report
 
-- **Created at:** 2017-05-09 15:06:50.251022
-- **Corral Version:** 0.2.7
+- **Created at:** 2017-10-17 20:59:37.374443
+- **Corral Version:** 0.3
 
 
 ## 1. Summary
 
 - **Tests Success:** `Yes`
-- **Tests Ran:** `2`
+- **Tests Ran:** `4`
 - **Processors:** `3`
-- **Coverage:** `81.94%`
-- **Maintainability & Style Errors:** `0`
+- **Coverage:** `93.57%`
+- **Maintainability & Style Errors:** `4`
 
 <!-- -->
 
-- **QA Index:** `27.31%`
-- **QA Qualification:** `F`
+- **QA Index:** `91.97%`
+- **QA Qualification:** `A-`
 
 
 ### 1.1 About The Corral Quality Assurance Index (QAI)
@@ -63,11 +63,13 @@ The Corral qualification is a quantitave scale based on QAI
 
 ### 2.1 Tests
 ```
+runTest (exo.tests.LoadTest) ... ok
 runTest (exo.tests.HabitableZoneTest) ... ok
 runTest (exo.tests.HabitableZoneNoRstarNoTeffTest) ... ok
+runTest (exo.tests.InHabitableZoneAlertTest) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.740s
+Ran 4 tests in 2.138s
 
 OK
 
@@ -79,22 +81,29 @@ OK
 Name              Stmts   Miss  Cover
 -------------------------------------
 exo/__init__.py       1      0   100%
-exo/alerts.py        37     16    57%
+exo/alerts.py        37     11    70%
 exo/commands.py       1      0   100%
-exo/load.py          20     10    50%
+exo/load.py          20      0   100%
 exo/models.py        23      0   100%
 exo/pipeline.py       4      0   100%
 exo/settings.py      17      0   100%
 exo/steps.py         19      0   100%
-exo/tests.py         22      0   100%
+exo/tests.py         49      0   100%
 -------------------------------------
-TOTAL               144     26    82%
+TOTAL               171     11    94%
 
 ```
 ---
 
 ### 2.3 MAINTAINABILITY & STYLE
 ```
+Found pep8-style errors.
+Please check the Python code style reference: https://www.python.org/dev/peps/pep-0008/
 
+Errors found: 
+exo/tests.py:25:0: F401 'mock' imported but unused
+exo/tests.py:34:0: E303 too many blank lines (3)
+exo/tests.py:38:0: E302 expected 2 blank lines, found 3
+exo/tests.py:96:4: E303 too many blank lines (2)
 ```
 

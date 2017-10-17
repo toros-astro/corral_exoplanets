@@ -1,7 +1,7 @@
 # Habitable Exo-Planets Documentation
 
-- **Created at:** 2017-05-09 01:13:48.737455
-- **Corral Version:** 0.2.7
+- **Created at:** 2017-10-17 16:43:55.638844
+- **Corral Version:** 0.3
 
 This is an example pipeline using a custom version of the Exoplanets
     dataset (http://exoplanets.org/).
@@ -19,10 +19,10 @@ to have life
 **Fields**
 
 - `planet`: Planet of the statistics
-- `luminosity`:
-- `radio_inner`:
-- `radio_outer`:
-- `in_habitable_zone`:
+- `luminosity`: Stellar luminosity [solar luminosity]
+- `radio_inner`: Inner boundary of habitable zone [AU]
+- `radio_outer`: Outer boundary of habitable zone [AU]
+- `in_habitable_zone`: [boolean]
 
 
 
@@ -36,13 +36,14 @@ Represent a single exoplanet.
 **Fields**
 
 - `name`: Name.
-- `mass`:
-- `sep`:
-- `dist`:
-- `mstar`:
-- `rstar`:
-- `teff`:
-- `fe`:
+- `per` : Period [days]
+- `mass`: Planet mass [solar masses]
+- `sep`: Star-planet Separation [AU]
+- `dist`: Distance to the star [pc]
+- `mstar`: Stellar mass [solar masses]
+- `rstar`: Stellar radius [solar radii]
+- `teff`: Effective temperature [K]
+- `fe`: Metallicity
 
 
 
@@ -71,9 +72,9 @@ and then determines if is in their habitable zone.
 ## Alerts
 
 
-### Alert **PlotAlert**
+### Alert **InHabitableZoneAlert**
 
-- **Python Path** ``exo.alerts.PlotAlert``
+- **Python Path** ``exo.alerts.InHabitableZoneAlert``
 
 Store a list of planets in habitable zone in a log file
 and also generate a period vs mass plot of this planets
